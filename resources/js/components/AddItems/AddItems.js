@@ -90,7 +90,7 @@ const AddItems = () => {
                         </div>
                         <div className="tag-container">
                             
-                            {tags.map((tag, index) => <div className="badge rounded-pill bg-light text-dark shadow mr-2">{tag} <button onClick={() => deleteTag(index)}>x</button></div>)}
+                            {tags.map((tag, index) => <div key={index} className="badge rounded-pill bg-light text-dark shadow mr-2">{tag} <button onClick={() => deleteTag(index)}>x</button></div>)}
 
                         </div>
                         <hr></hr>

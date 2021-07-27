@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\ShopListController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/list', function () {
-    return response()->json([
-        'items' => ['hello', 'bread', 'fsdfdsf']
-    ]);
-});
+Route::get('/shoplist', [ShopListController::class, 'index']);
+
+Route::get('/items', [ItemController::class, 'index']);
+
+Route::post('/shoplist', [ShopListController::class, 'store']);
 

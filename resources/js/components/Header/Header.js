@@ -13,7 +13,7 @@ const Header = () => {
             <NavLink className="navbar-brand" to="/about">
             <span className="nav-icon">
                 
-                <h3> <HiShoppingCart /> <span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 
+                <h3 className=""> <HiShoppingCart /> <span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 
             </span>
                
                
