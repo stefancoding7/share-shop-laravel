@@ -2,6 +2,7 @@ import React from 'react';
 import './navbar.scss';
 import { HiShoppingCart } from 'react-icons/hi';
 import { TiThMenuOutline } from "react-icons/ti";
+import { GiFoldedPaper, GiSettingsKnobs } from 'react-icons/gi';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
@@ -29,11 +30,18 @@ const Navbar = () => {
                 <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body small">
-                <div class="btn-group btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-secondary">Secondary</button>
-                <button type="button" class="btn btn-secondary">Secondary</button>
-                <button type="button" class="btn btn-secondary">Secondary</button>
+            <div className="offcanvas-body small">
+                <div className="d-flex justify-content-around" >
+                    
+                        <NavLink to="/">
+                            <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close"><p><span><GiFoldedPaper/>  Shop Lists</span></p></button>
+                        </NavLink>
+                   
+                   
+                        <button type="button" class="btn btn-secondary btn-lg"><GiSettingsKnobs/> Settings</button>
+                    
+                
+                
                 </div>
             </div>
         </div>

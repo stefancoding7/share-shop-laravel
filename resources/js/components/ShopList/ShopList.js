@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { GiFoldedPaper, GiCheckMark } from "react-icons/gi";
+import { BiBasket } from "react-icons/bi";
+import { NavLink } from 'react-router-dom';
 
 class ShopList extends Component {
 
@@ -35,13 +37,16 @@ class ShopList extends Component {
 
         const mapedLists = shopList.map((list, index) => (
             <>
-                <li className="list-group-item d-flex ">
-                    <div  key={index} className="p-2 w-100 bd-highlight"><GiFoldedPaper /> {list.shopListName}</div>
-                    <form onSubmit={this.handleSubmit}>
+                <li key={index}  className="list-group-item d-flex ">
+                    <div  className="p-2 w-100 bd-highlight "><span class=""><GiFoldedPaper /> {list.shopListName}</span></div>
+                   
                         <div className="p-2 flex-shrink-1 bd-highlight">
-                            <button type="submit" className="btn btn-light check-icon" ><GiCheckMark /></button>
+                            <NavLink to="/items">
+                                <button type="submit" className="btn btn-light check-icon" ><BiBasket /></button>
+                            </NavLink>
+                            
                         </div>  
-                    </form>
+                   
                     
                 </li>
             </>
@@ -59,7 +64,7 @@ class ShopList extends Component {
                         </div>
                             
                         </div>
-                    <ul className="list-group list-group-flush ">
+                    <ul className="list-group list-group-flush list-inline">
                         {mapedLists}
                         
                         
