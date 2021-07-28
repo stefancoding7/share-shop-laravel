@@ -19,7 +19,7 @@ const AddItems = () => {
         const { key } = e;
         const trimmedInput = input.trim();
         if(tags.includes(trimmedInput)) {
-            setError('Your item already in list');
+            setError('Your item is already on your list');
         }
         if (trimmedInput.length && !tags.includes(trimmedInput)) {
           e.preventDefault();
@@ -33,7 +33,7 @@ const AddItems = () => {
         const { key } = e;
         const trimmedInput = input.trim();
         if(tags.includes(trimmedInput)) {
-            setError('Your item already in list');
+            setError('Your item is already on your list');
         }
         if (key === ',' || key === '.' && trimmedInput.length && !tags.includes(trimmedInput)) {
           e.preventDefault();

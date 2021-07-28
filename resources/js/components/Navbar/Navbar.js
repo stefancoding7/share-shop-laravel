@@ -11,7 +11,7 @@ const Navbar = () => {
         <>
         <nav className="navbar navbar-light">
             <div className="container-fluid">
-            <NavLink className="navbar-brand" to="/about">
+            <NavLink className="navbar-brand" to="/">
             <span className="nav-icon">
                 
                 <h3 className=""> <HiShoppingCart /> <span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 

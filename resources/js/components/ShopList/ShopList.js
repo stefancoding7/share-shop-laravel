@@ -58,7 +58,10 @@ class ShopList extends Component {
                     <div className="card-header">
                         <div className="row">
                             <div className="col-6">
-                                <button className="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">New Shop List <b> +</b></button>
+                                <NavLink to="/add-shop-list">
+                                    <button className="btn btn-light" type="button" >New Shop List <b> +</b></button>
+                                </NavLink>
+                                
                             </div>
                             
                         </div>
