@@ -8,6 +8,8 @@ import ShopList from './ShopList/ShopList';
 import Items from './Items';
 import NotFound from './NotFound/NotFound';
 import Navbar from './Navbar/Navbar';
+import Login from './Auth/Login/Login';
+import Register from './Auth/Register/Register';
 
 
 class App extends Component {
@@ -18,8 +20,11 @@ class App extends Component {
           
         
           <Switch>
+              
               <Route exact path="/" render={() => <ShopList />}/>
-              <Route exact path="/items" render={ () => <Items /> } />
+              <Route path="/login" render={() => <Login />} />
+              <Route path="/register" render={() => <Register />} />
+              <Route path="/items" render={ () => <Items /> } />
               <Route component={NotFound} />
           </Switch>
         </Router>

@@ -34,11 +34,11 @@ const Navbar = () => {
                 <div className="d-flex justify-content-around" >
                     
                         <NavLink to="/">
-                            <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close"><p><span><GiFoldedPaper/>  Shop Lists</span></p></button>
+                            <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close"><p><span>Shop Lists</span></p></button>
                         </NavLink>
                    
                    
-                        <button type="button" class="btn btn-secondary btn-lg"><GiSettingsKnobs/> Settings</button>
+                        <button type="button" class="btn btn-secondary btn-lg">Settings</button>
                     
                 
                 

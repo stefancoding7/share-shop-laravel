@@ -38,7 +38,7 @@ class ShopList extends Component {
         const mapedLists = shopList.map((list, index) => (
             <>
                 <li key={index}  className="list-group-item d-flex ">
-                    <div  className="p-2 w-100 bd-highlight "><span class=""><GiFoldedPaper /> {list.shopListName}</span></div>
+                    <div  className="p-2 w-100 bd-highlight "><span class="">{list.shopListName}</span></div>
                    
                         <div className="p-2 flex-shrink-1 bd-highlight">
                             <NavLink to="/items">

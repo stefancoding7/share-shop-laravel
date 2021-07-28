@@ -42,7 +42,7 @@ class CardList extends Component {
         const mapedItems = items.map((item, index) => (
             <>
                 <li className="list-group-item d-flex ">
-                    <div  key={index} className="p-2 w-100 bd-highlight"><GiSlicedBread /> {item}</div>
+                    <div  key={index} className="p-2 w-100 bd-highlight">{item}</div>
                     <form onSubmit={this.handleSubmit}>
                         <div className="p-2 flex-shrink-1 bd-highlight">
                             <button type="submit" className="btn btn-light check-icon" ><GiCheckMark /></button>
