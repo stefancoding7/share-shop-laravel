@@ -69,7 +69,8 @@ const AddShopList = () => {
 
           axios.post(`http://192.168.0.21:5000/api/shoplist`, {
             shopListName: listName,
-            slug: 'gfdg'
+            slug: 'gfdg',
+            tags: 'helo'
           }) 
          .then(response => {
             window.location = '/';
@@ -99,7 +100,7 @@ const AddShopList = () => {
                         </div>
                     </div>
                    
-                </form>
+                
                
 
                 <div className="input-items">
@@ -112,15 +113,12 @@ const AddShopList = () => {
                         type="text" className="form-control" placeholder="Add items (Milk, Bread, Beer)" aria-label="Recipient's username" aria-describedby="button-addon2" />
                         <button onClick={clickedItems} className="btn btn-secondary" type="button" id="button-addon2">Add</button>
                     </div>
-                </div>
-                <div class="paper">
-                    <div class="paper-content">
-                        {tags.map((tag, index) => <div key={index} className="badge rounded-pill bg-light text-dark shadow mr-2">{tag} <button onClick={() => deleteTag(index)}>x</button></div>)}
-                    </div>
-                </div>
+                  </div>
+                  <button className="btn btn-secondary" type="submit">Create</button>
+                </form>
                 <div className="tag-container">
-                <div class="fold"></div>
-                   
+                
+                {tags.map((tag, index) => <div key={index} className="badge rounded-pill bg-light text-dark shadow mr-2">{tag} <button onClick={() => deleteTag(index)}>x</button></div>)}
 
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\ShopList;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ShopListController extends Controller
@@ -24,10 +25,24 @@ class ShopListController extends Controller
      */
     public function store(Request $request)
     {
-        return ShopList::create([
+        
+        ShopList::create([
             'shopListName' => $request->shopListName,
             'slug' => $request->slug
         ]);
+
+        Item::create([
+            'tags' => 'hello'
+        ]);
+
+        //loop on tags
+        // $tags = $request->tags;
+        // foreach($tags as $tag){
+        //     Item::create([
+        //         'tags' => $tag
+        //     ]);
+        // }
+       
     }
 
     /**

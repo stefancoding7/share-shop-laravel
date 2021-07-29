@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 //components
 import ShopList from './ShopList/ShopList';
-import Items from './Items';
+import Items from './Items/Items';
 import NotFound from './NotFound/NotFound';
 import Navbar from './Navbar/Navbar';
 //post routes
