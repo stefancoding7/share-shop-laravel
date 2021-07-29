@@ -25,21 +25,41 @@ class ShopListController extends Controller
      */
     public function store(Request $request)
     {
-        
-        ShopList::create([
-            'shopListName' => $request->shopListName,
-            'slug' => $request->slug
-        ]);
+        $shopList = new ShopList();
+        $shopList->shopListName = $request->shopListName;
+        $shopList->slug = $request->slug;
+        $shopList->save();
+        $shop_list_id = $shopList->id;
 
-        Item::create([
-            'tags' => 'hello'
-        ]);
+
+        
+        $tags = $request->tags;
+        foreach($tags as $tag){
+            $item = new Item();
+            $item->tags = $tag;
+            $item->shop_list_id = $shop_list_id;
+            $item->save();
+        }
+        
+    //    ShopList::create([
+    //         'shopListName' => $request->shopListName,
+    //         'slug' => $request->slug
+    //     ]);
+
+       // $shopListId = $shoplist->id();
+        
+
+        // Item::create([
+        //     'tags' => $request->tags,
+        //     'shop_list_id' =>  5
+        // ]);
 
         //loop on tags
         // $tags = $request->tags;
         // foreach($tags as $tag){
         //     Item::create([
-        //         'tags' => $tag
+        //         'tags' => $tag,
+        //         'shop_list_id' =>  $shopListId
         //     ]);
         // }
        

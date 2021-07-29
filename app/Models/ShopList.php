@@ -19,7 +19,7 @@ class ShopList extends Model
         'slug'
     ];
 
-    public function shopList()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

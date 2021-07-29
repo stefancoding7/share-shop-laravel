@@ -14,10 +14,11 @@ class Item extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'tags'
+        'tags',
+        'shop_list_id'
     ];
 
-    public function itemModels()
+    public function shop_lists()
     {
         return $this->belongsTo(ShopList::class);
     }

@@ -70,7 +70,7 @@ const AddShopList = () => {
           axios.post(`http://192.168.0.21:5000/api/shoplist`, {
             shopListName: listName,
             slug: 'gfdg',
-            tags: 'helo'
+            tags: tags
           }) 
          .then(response => {
             window.location = '/';
