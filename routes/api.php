@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/shoplist', [ShopListController::class, 'index']);
 
-Route::get('/items', [ItemController::class, 'index']);
+Route::get('/items/{id}', [ItemController::class, 'show']);
 
 Route::post('/shoplist', [ShopListController::class, 'store']);
 

@@ -14,6 +14,7 @@ class ShopListController extends Controller
      */
     public function index()
     {
+        
         return ShopList::all();
     }
 

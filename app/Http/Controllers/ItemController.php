@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ShopList;
+use App\Models\Item;
+use App\Http\Resources\Items as ItemsResource;
+use App\Http\Resources\ItemsCollection;
 
 class ItemController extends Controller
 {
@@ -13,9 +17,15 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'items' => ['chlieb', 'maslo', 'mlieko']
-        ]);
+        
+        $id = 1;
+        $shopList = ShopList::find($id);
+        $items = $shopList->items;
+        
+        return response()->json($items);
+        // return response()->json([
+        //     'items' => ['chlieb', 'maslo', 'mlieko']
+        // ]);
     }
 
     /**
@@ -37,7 +47,11 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $shopList = ShopList::find($id);
+        $items = $shopList->items;
+        $data = $items;
+
+        return response()->json($data);
     }
 
     /**

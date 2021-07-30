@@ -30,7 +30,7 @@ class App extends Component {
               <Route exact path="/" render={() => <ShopList />}/>
               <Route path="/login" render={() => <Login />} />
               <Route path="/register" render={() => <Register />} />
-              <Route path="/items" render={ () => <Items /> } />
+              <Route exact  path="/items/:id" render={ () => <Items /> } />
               <Route path="/add-shop-list" render={() => <AddShopList/> } />
               <Route component={NotFound} />
           </Switch>
