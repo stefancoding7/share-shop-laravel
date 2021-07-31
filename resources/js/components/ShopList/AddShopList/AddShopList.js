@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 require('./addshoplist.scss');
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import  config from '../../../config/config';
 
 const AddShopList = () => {
     const [input, setInput] = useState('');
@@ -67,7 +68,7 @@ const AddShopList = () => {
           const listName = e.target.shopListName.value
           e.preventDefault();
 
-          axios.post(`http://192.168.0.21:5000/api/shoplist`, {
+          axios.post(`${config.apiBaseUrl}shoplist`, {
             shopListName: listName,
             slug: 'gfdg',
             tags: tags

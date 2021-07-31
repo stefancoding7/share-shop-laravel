@@ -18,11 +18,11 @@ class ItemController extends Controller
     public function index()
     {
         
-        $id = 1;
-        $shopList = ShopList::find($id);
-        $items = $shopList->items;
+        // $id = 1;
+        // $shopList = ShopList::find($id);
+        // $items = $shopList->items;
         
-        return response()->json($items);
+        // return response()->json($items);
         // return response()->json([
         //     'items' => ['chlieb', 'maslo', 'mlieko']
         // ]);

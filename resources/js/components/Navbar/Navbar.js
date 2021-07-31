@@ -14,7 +14,7 @@ const Navbar = () => {
             <NavLink className="navbar-brand" to="/">
             <span className="nav-icon">
                 
-                <h3 className=""> <HiShoppingCart /> <span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 
+                <h3 className=""><span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 
             </span>
                
                

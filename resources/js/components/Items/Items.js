@@ -4,6 +4,8 @@ import { GrClose } from "react-icons/gr";
 const axios = require('axios').default;
 import AddItems from './AddItems/AddItems';
 import { hashHistory, Link, withRouter } from "react-router-dom";
+import  config from '../../config/config';
+
 
 
 class CardList extends Component {
@@ -20,7 +22,7 @@ class CardList extends Component {
     this.setState({
         id: id
     })
-       await axios.get(`http://192.168.0.21:5000/api/items/${id}`) 
+       await axios.get(`${config.apiBaseUrl}items/${id}`) 
         .then(data => {
             
             this.setState({ 
@@ -50,8 +52,8 @@ class CardList extends Component {
 
         const mapedItems = items.map((item, index) => (
             <>
-                <li className="list-group-item d-flex ">
-                    <div  key={index} className="p-2 w-100 bd-highlight">{item.tags}</div>
+                <li  className="list-group-item d-flex ">
+                    <div key={index}  className="p-2 w-100 bd-highlight">{item.tags}</div>
                     <form onSubmit={this.handleSubmit}>
                         <div className="p-2 flex-shrink-1 bd-highlight">
                         <div className="btn-group">

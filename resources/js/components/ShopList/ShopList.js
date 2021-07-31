@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GiFoldedPaper, GiCheckMark } from "react-icons/gi";
 import { BiBasket } from "react-icons/bi";
 import { NavLink } from 'react-router-dom';
+import  config from '../../config/config';
 
 class ShopList extends Component {
 
@@ -11,7 +12,7 @@ class ShopList extends Component {
     }
 
     async componentDidMount() {
-        await axios.get(`http://192.168.0.21:5000/api/shoplist`) 
+        await axios.get(`${config.apiBaseUrl}shoplist`) 
          .then(data => {
              
              this.setState({ 
@@ -37,8 +38,8 @@ class ShopList extends Component {
 
         const mapedLists = shopList.map((list, index) => (
             <>
-                <li key={index}  className="list-group-item d-flex ">
-                    <div  className="p-2 w-100 bd-highlight "><span class="">{list.shopListName}</span></div>
+                <li   className="list-group-item d-flex ">
+                    <div key={index} className="p-2 w-100 bd-highlight "><span class="">{list.shopListName}</span></div>
                    
                         <div className="p-2 flex-shrink-1 bd-highlight">
                             <NavLink to={`/items/${list.id}`}>
