@@ -74,7 +74,7 @@ const AddShopList = () => {
             tags: tags
           }) 
          .then(response => {
-            window.location = '/';
+            window.location = `/items/${response.data.id}`;
                  
          }) 
          .catch(function (error) {

@@ -10,18 +10,31 @@ import NotFound from './NotFound/NotFound';
 import Navbar from './Navbar/Navbar';
 //post routes
 import AddShopList from './ShopList/AddShopList/AddShopList';
+import { Sanctum } from 'react-sanctum';
 
 
+const sanctumConfig = {
+  apiUrl: 'http://127.0.0.1:8000/',
+  csrfCookieRoute: "sanctum/csrf-cookie",
+  signInRoute: "api/login",
+  signOutRoute: "api/logout",
+  userObjectRoute: "api/user",
+};
 
 //auth routes
 import Login from './Auth/Login/Login';
 import Register from './Auth/Register/Register';
 
 
+
 class App extends Component {
+
+  
+
   render(){
     return (
-        <Router>
+      <Sanctum config={sanctumConfig}>
+          <Router>
         <Navbar />
           
         
@@ -35,6 +48,8 @@ class App extends Component {
               <Route component={NotFound} />
           </Switch>
         </Router>
+      </Sanctum>
+        
     );
   }
   

@@ -25,8 +25,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::get('/shoplist', [ShopListController::class, 'index']);
 Route::get('/items/{id}', [ItemController::class, 'show']);
-
+Route::delete('/itemdelete/{id}', [ItemController::class, 'destroy']);
+Route::put('/itemcomplete/{id}', [ItemController::class, 'update']);
 Route::post('/shoplist', [ShopListController::class, 'store']);
+Route::delete('/shoplistdelete/{id}', [ShopListController::class, 'destroy']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 

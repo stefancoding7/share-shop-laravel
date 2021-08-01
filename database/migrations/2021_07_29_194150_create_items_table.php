@@ -16,7 +16,8 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('tags');
-            $table->unsignedInteger('shop_list_id');
+            $table->boolean('completed')->default(false);
+            $table->unsignedBigInteger('shop_list_id');
             $table->timestamps();
             $table->foreign('shop_list_id')
                 ->references('id')

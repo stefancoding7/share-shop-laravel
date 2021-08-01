@@ -35,12 +35,26 @@ class ShopListController extends Controller
 
         
         $tags = $request->tags;
-        foreach($tags as $tag){
-            $item = new Item();
-            $item->tags = $tag;
-            $item->shop_list_id = $shop_list_id;
-            $item->save();
+        if(is_array($tags)){
+            foreach($tags as $tag){
+                $item = new Item();
+                $item->tags = $tag;
+                $item->shop_list_id = $shop_list_id;
+                $item->save();
+                
+                
+            }
+        } else {
+            return response()->json([
+                'tags' => $tags,
+                'message' =>'Is not array'
+            ]);
         }
+
+       return response()->json([
+            'id' => $shop_list_id
+        ]);
+        
         
     //    ShopList::create([
     //         'shopListName' => $request->shopListName,
@@ -86,7 +100,7 @@ class ShopListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
     }
 
     /**
@@ -97,6 +111,16 @@ class ShopListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shopList = ShopList::find($id);
+        // $shopList->items()->each(function($item) {
+        //     $item->delete(); // <-- raise another deleting event on Post to delete comments
+        //  });
+       $shopList->items()->delete();
+       $shopList->delete();
+    }
+
+    public function complete($id) 
+    {
+       
     }
 }

@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { withSanctum } from "react-sanctum";
+import config from '../../../config/config';
+import axios from 'axios';
 
 const Login = () => {
-
-
+   // const [name, setName] = ('');
+    const [user, setUser] = useState([]);
+   function handleSubmit(e) {
+       e.preventDefault();
+       console.log('clicked');
+    axios.get(`${config.apiBaseUrl}login`) 
+    .then(function (response) {
+        const user = response.data;
+        setUser(user); // The react-sanctum setUser function
+        
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    }
     return(
         <>  
         <div className="container-fluid">
-        <form>
+        <form onSubmit={handleSubmit}>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />

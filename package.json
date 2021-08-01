@@ -27,6 +27,7 @@
     "dependencies": {
         "react-icons": "^4.2.0",
         "react-router-dom": "^5.2.0",
+        "react-sanctum": "^2.0.1",
         "ui": "^0.2.4"
     }
 }

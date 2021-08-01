@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
 import { GiFoldedPaper, GiCheckMark } from "react-icons/gi";
 import { BiBasket } from "react-icons/bi";
+import { GrClose } from "react-icons/gr";
 import { NavLink } from 'react-router-dom';
 import  config from '../../config/config';
+
 
 class ShopList extends Component {
 
 
     state = {
         shopList: []
+    }
+
+    removeShopList(id, index)  {
+        console.log(`removed: ${id}`);
+        axios.delete(`${config.apiBaseUrl}shoplistdelete/${id}`) 
+         .then(response => {
+           //window.location = '/';
+           let array = [...this.state.shopList]; 
+           if (index !== -1) {
+            array.splice(index, 1);
+            
+            this.setState({shopList: array});
+          }
+           console.log(this.state.shopList);
+           console.log(index);
+             
+         }) 
+         .catch(function (error) {
+             // handle error
+             console.log(error);
+           })
     }
 
     async componentDidMount() {
@@ -31,6 +54,8 @@ class ShopList extends Component {
            
        }
 
+       
+
     render(){
         const { shopList } = this.state;
         console.log(`shopList: ${shopList}`);
@@ -42,9 +67,14 @@ class ShopList extends Component {
                     <div key={index} className="p-2 w-100 bd-highlight "><span class="">{list.shopListName}</span></div>
                    
                         <div className="p-2 flex-shrink-1 bd-highlight">
+                        <div className="btn-group">
+                        <button className="btn btn-light" type="button" onClick={() => this.removeShopList(list.id, index)}><GrClose /></button>
                             <NavLink to={`/items/${list.id}`}>
+                                
                                 <button type="submit" className="btn btn-light check-icon" ><BiBasket /></button>
                             </NavLink>
+                        </div>
+                           
                             
                         </div>  
                    

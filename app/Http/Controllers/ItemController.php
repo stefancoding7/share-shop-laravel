@@ -48,7 +48,9 @@ class ItemController extends Controller
     public function show($id)
     {
         $shopList = ShopList::find($id);
+        
         $items = $shopList->items;
+        $items = $items;
         $data = $items;
 
         return response()->json($data);
@@ -63,7 +65,16 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::find($id);
+        if(!$item->completed){
+           $item->completed = true;
+           
+            $item->update();
+        } else {
+            $item->completed = false;
+           
+            $item->update();
+        }
     }
 
     /**
@@ -74,6 +85,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        return $item->delete();
     }
 }
