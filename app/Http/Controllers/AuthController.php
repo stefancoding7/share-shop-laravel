@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -33,13 +34,7 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function logout(Request $request) {
-        auth()->user()->tokens()->delete();
-
-        return [
-            'message' => 'Logged Out'
-        ];
-    }
+    
 
     public function login(Request $request)
     {
@@ -60,10 +55,34 @@ class AuthController extends Controller
         $token = $user->createToken('shareShopToken')->plainTextToken;
 
         $response = [
-            'user' => $user,
+            'user' => Auth::id(),
             'token' => $token
         ];
 
+        
+
         return response($response, 201);
+    }
+
+    public function logout(Request $request) {
+        $authUser = Auth::user();
+
+        if($authUser) {
+            $authUser->tokens()->delete();
+            return [
+                'message' => 'Logged Out',
+                'user' => $authUser
+            ];
+        } else {
+            return response() ->json([
+                'message' => 'User not found'
+            ]);
+        }
+
+        // return response()->json([
+        //     'message' => 'okey'
+        // ]);
+     
+        
     }
 }

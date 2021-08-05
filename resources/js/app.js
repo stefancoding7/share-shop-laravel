@@ -8,6 +8,7 @@ require('./bootstrap');
 require('../css/app.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 /**
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -2,6 +2,7 @@
 use App\Http\Controllers\ShopListController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,21 +17,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout']);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
    
+    Route::get('/shoplist', [ShopListController::class, 'index']);
+    Route::get('/user', [UserController::class, 'index']);
+
 });
 
-Route::get('/shoplist', [ShopListController::class, 'index']);
+//Route::get('/shoplist', [ShopListController::class, 'index']);
 Route::get('/items/{id}', [ItemController::class, 'show']);
 Route::delete('/itemdelete/{id}', [ItemController::class, 'destroy']);
 Route::put('/itemcomplete/{id}', [ItemController::class, 'update']);
 Route::post('/shoplist', [ShopListController::class, 'store']);
 Route::delete('/shoplistdelete/{id}', [ShopListController::class, 'destroy']);
 
-Route::post('/logout', [AuthController::class, 'logout']);
+
+
 
 
 

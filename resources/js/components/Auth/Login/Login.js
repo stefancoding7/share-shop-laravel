@@ -1,47 +1,116 @@
 import React, { useState } from 'react';
 import { withSanctum } from "react-sanctum";
 import config from '../../../config/config';
+import apiClient from '../apiClient/apiClient';
 import axios from 'axios';
 
-const Login = () => {
-   // const [name, setName] = ('');
-    const [user, setUser] = useState([]);
-   function handleSubmit(e) {
-       e.preventDefault();
-       console.log('clicked');
-    axios.get(`${config.apiBaseUrl}login`) 
-    .then(function (response) {
-        const user = response.data;
-        setUser(user); // The react-sanctum setUser function
+const Login = (props) => {
+
+    const [email, setEmail] = React.useState('');
+
+    const [password, setPassword] = React.useState('');
+    const [data, setData] = React.useState([]);
+
+    // const[loggedIn, setLoggedIn] = React.useState(false);
+
+
+    const logout = () => {
+        apiClient.get('/sanctum/csrf-cookie').then(response => {
+            apiClient.post('/logout').then(response => {
+                console.log(response);
+                if (response.status === 204) {
+                   
+                    // setLoggedIn(false);
         
-    })
-    .catch(function (error) {
-        console.log(error);
+                    // sessionStorage.setItem('loggedIn', false);
+        
+                }
+        
+            })
+        })
+
+        
+    
+    };
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        apiClient.get('/sanctum/csrf-cookie')
+
+    .then(response => {
+
+        apiClient.post('/login', {
+
+            email: email,
+
+            password: password
+
+        }).then(response => {
+
+            if (response) {
+                window.location = '/';
+               // props.login();
+
+            }
+
+        })
+
     });
+
     }
-    return(
-        <>  
-        <div className="container-fluid">
-        <form onSubmit={handleSubmit}>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" />
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+    return (
+
+        <div>
+
+            <h1>Login</h1>
+            <h2>hello {data}</h2>
+            <form onSubmit={handleSubmit}>
+
+                <input
+
+                    type="email"
+
+                    name="email"
+
+                    placeholder="Email"
+
+                    value={email}
+
+                    onChange={e => setEmail(e.target.value)}
+
+                    required
+
+                />
+
+                <input
+
+                    type="password"
+
+                    name="password"
+
+                    placeholder="Password"
+
+                    value={password}
+
+                    onChange={e => setPassword(e.target.value)}
+
+                    required
+
+                />
+
+                <button type="submit">Login</button>
+
             </form>
+
+            <button onClick={logout} className="nav-link btn btn-link">Logout</button> 
+
         </div>
-           
-        </>
-    )
+
+    );
+
 }
 
 export default Login;

@@ -1,11 +1,52 @@
 import React from 'react';
 import './navbar.scss';
+import apiClient from '../Auth/apiClient/apiClient';
 import { HiShoppingCart } from 'react-icons/hi';
 import { TiThMenuOutline } from "react-icons/ti";
 import { GiFoldedPaper, GiSettingsKnobs } from 'react-icons/gi';
+
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+    // const [user, setUser] = useState([]);
+
+    // const logout = () => {
+
+    //     apiClient.post('logout').then(response => {
+    
+    //         if (response.status === 204) {
+    
+    //             // setLoggedIn(false);
+    
+    //             // sessionStorage.setItem('loggedIn', false);
+    
+    //         }
+    
+    //     })
+    
+    // };
+
+    // async componentDidMount() {
+    //     await apiClient.get(`${config.apiBaseUrl}shoplist`) 
+    //      .then(data => {
+             
+    //          this.setState({ 
+    //             shopList: data.data,
+                 
+    //          })  
+ 
+    //          console.log(data.data);
+                 
+    //      }) 
+    //      .catch(function (error) {
+    //          // handle error
+    //          console.log(error);
+    //        })
+   
+           
+    //    }
+
+
 
     return(
         <>
@@ -36,7 +77,7 @@ const Navbar = () => {
                         <NavLink to="/">
                             <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close"><p><span>Shop Lists</span></p></button>
                         </NavLink>
-                   
+                       
                    
                         <button type="button" class="btn btn-secondary btn-lg">Settings</button>
                     

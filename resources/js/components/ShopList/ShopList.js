@@ -3,15 +3,20 @@ import { GiFoldedPaper, GiCheckMark } from "react-icons/gi";
 import { BiBasket } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { NavLink } from 'react-router-dom';
+import apiClient from '../Auth/apiClient/apiClient';
 import  config from '../../config/config';
+import { UserContext } from '../../UserContext';
 
 
 class ShopList extends Component {
 
+    static contextType = UserContext
 
     state = {
         shopList: []
     }
+
+    
 
     removeShopList(id, index)  {
         console.log(`removed: ${id}`);
@@ -35,7 +40,7 @@ class ShopList extends Component {
     }
 
     async componentDidMount() {
-        await axios.get(`${config.apiBaseUrl}shoplist`) 
+        await apiClient.get(`${config.apiBaseUrl}shoplist`) 
          .then(data => {
              
              this.setState({ 
@@ -50,7 +55,9 @@ class ShopList extends Component {
              // handle error
              console.log(error);
            })
-   
+           
+           const { UserContext }  = this.context;
+        console.log(UserContext);
            
        }
 
@@ -58,6 +65,7 @@ class ShopList extends Component {
 
     render(){
         const { shopList } = this.state;
+        
         console.log(`shopList: ${shopList}`);
 
 
