@@ -66,7 +66,7 @@ class UserController extends Controller
             $authuser = auth()->user();
             return response()->json(['message' => 'Login successful', 'user' => $authuser], 200);
         } else {
-            return response()->json(['message' => 'Invalid email or password'], 401);
+            return response()->json(['error' => 'Invalid email or password']);
         }
     }
 

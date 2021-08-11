@@ -18,11 +18,16 @@ class CreateItemsTable extends Migration
             $table->string('tags');
             $table->boolean('completed')->default(false);
             $table->unsignedBigInteger('shop_list_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('shop_list_id')
                 ->references('id')
                 ->on('shop_lists')
                 ->onDelete('cascade');
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
         });
     }
 

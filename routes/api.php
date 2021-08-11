@@ -18,23 +18,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-   
+    Route::get('/items/{id}', [ItemController::class, 'show']);
+    Route::delete('/itemdelete/{id}', [ItemController::class, 'destroy']);
+    Route::put('/itemcomplete/{id}', [ItemController::class, 'update']);
+    Route::post('/additems/{id}', [ItemController::class, 'addItems']);
+
+    Route::post('/shoplist', [ShopListController::class, 'store']);
+    Route::delete('/shoplistdelete/{id}', [ShopListController::class, 'destroy']);
     Route::get('/shoplist', [ShopListController::class, 'index']);
+
     Route::get('/user', [UserController::class, 'index']);
 
 });
 
 //Route::get('/shoplist', [ShopListController::class, 'index']);
-Route::get('/items/{id}', [ItemController::class, 'show']);
-Route::delete('/itemdelete/{id}', [ItemController::class, 'destroy']);
-Route::put('/itemcomplete/{id}', [ItemController::class, 'update']);
-Route::post('/shoplist', [ShopListController::class, 'store']);
-Route::delete('/shoplistdelete/{id}', [ShopListController::class, 'destroy']);
+
 
 
 

@@ -1,72 +1,67 @@
 import React, { useState } from 'react';
-import { withSanctum } from "react-sanctum";
-import config from '../../../config/config';
+// import config from '../../../config/config';
 import apiClient from '../apiClient/apiClient';
-import axios from 'axios';
+// import axios from 'axios';
+import { GiCogLock } from 'react-icons/gi';
 
 const Login = (props) => {
 
     const [email, setEmail] = React.useState('');
 
     const [password, setPassword] = React.useState('');
-    const [data, setData] = React.useState([]);
+    //const [data, setData] = React.useState([]);
 
     // const[loggedIn, setLoggedIn] = React.useState(false);
 
-
-    const logout = () => {
-        apiClient.get('/sanctum/csrf-cookie').then(response => {
-            apiClient.post('/logout').then(response => {
-                console.log(response);
-                if (response.status === 204) {
-                   
-                    // setLoggedIn(false);
-        
-                    // sessionStorage.setItem('loggedIn', false);
-        
-                }
-        
-            })
-        })
-
-        
     
-    };
+    
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
+        props.context.actions.signIn(email, password);
+        
+        
+    //     apiClient.get('/sanctum/csrf-cookie')
 
-        apiClient.get('/sanctum/csrf-cookie')
+    // .then(response => {
 
-    .then(response => {
+    //     apiClient.post('/login', {
 
-        apiClient.post('/login', {
+    //         email: email,
 
-            email: email,
+    //         password: password
 
-            password: password
+    //     }).then(response => {
 
-        }).then(response => {
+    //         if (response) {
+    //             console.log(response.data.user);
+    //            // localStorage.setItem('user', response.data.user)
+    //            window.location = '/';
+    //            // props.login();
 
-            if (response) {
-                window.location = '/';
-               // props.login();
+    //         }
 
-            }
+    //     })
 
-        })
-
-    });
-
+    // });
+        
     }
-
+    
     return (
-
+       
         <div>
-
+              
             <h1>Login</h1>
-            <h2>hello {data}</h2>
+
+            {props.context.error ? 
+                <div class="alert alert-danger" role="alert">
+                   {props.context.error}
+                </div>
+                :
+                ''
+            
+            }
+            
             <form onSubmit={handleSubmit}>
 
                 <input
@@ -105,7 +100,7 @@ const Login = (props) => {
 
             </form>
 
-            <button onClick={logout} className="nav-link btn btn-link">Logout</button> 
+            
 
         </div>
 

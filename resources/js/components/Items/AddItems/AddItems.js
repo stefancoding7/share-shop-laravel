@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 require('./additems.css')
 import { GiSlicedBread, GiCheckMark, GiBigEgg, GiChiliPepper, GiTomato, GiMilkCarton } from "react-icons/gi";
 const axios = require('axios').default;
+import config from '../../../config/config';
 
-const AddItems = () => {
+const AddItems = (props) => {
     const [input, setInput] = useState('');
     const[tags, setTags] = useState([]);
     const [error, setError] = useState('');
@@ -25,6 +26,9 @@ const AddItems = () => {
           e.preventDefault();
           setTags(prevState => [...prevState, trimmedInput]);
           setInput('');
+          console.log(props.id);
+          
+          
           
         }
       }
@@ -59,6 +63,19 @@ const AddItems = () => {
 
       const deleteTag = (index) => {
         setTags(prevState => prevState.filter((tag, i) => i !== index))
+      }
+
+      const additems = () => {
+          console.log(props.id);
+        axios.post(`${config.apiBaseUrl}additems/${props.id}`, {
+            tags: tags
+          }) 
+         .then(response => {
+            console.log('updated');
+            
+            console.log(props.items);
+            window.location = `${props.id}`     
+         }) 
       }
 
     return(
@@ -143,7 +160,7 @@ const AddItems = () => {
                         
                     </div>
                     <div className="update-items m-3">
-                            <button type="button" class="btn btn-secondary">Add items</button>
+                            <button onClick={additems} type="button" class="btn btn-secondary">Add items</button>
                     </div>
                     
                 </div>

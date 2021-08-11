@@ -8,9 +8,12 @@ import ShopList from './ShopList/ShopList';
 import Items from './Items/Items';
 import NotFound from './NotFound/NotFound';
 import Navbar from './Navbar/Navbar';
+import Settings from '../components/Settings/Settings';
+import Welcome from '../components/Welcome/Welcome';
 //post routes
 import AddShopList from './ShopList/AddShopList/AddShopList';
-import { Sanctum } from 'react-sanctum';
+
+
 
 
 
@@ -18,13 +21,18 @@ import { Sanctum } from 'react-sanctum';
 //auth routes
 import Login from './Auth/Login/Login';
 import Register from './Auth/Register/Register';
-import { UserContext } from '../UserContext';
 
+import PrivateRoute from '../PrivateRoute';
+import withContext from '../Context';
 
-
-
-
-const  App = () => {
+const ShopListWithContext = withContext(ShopList);
+const LoginWithContext = withContext(Login);
+const AddShopListWithContext = withContext(AddShopList);
+const ItemsWithContext = withContext(Items);
+const RegisterWithContext = withContext(Register);
+const SettingsWithContext = withContext(Settings);
+const NavBarWithContext = withContext(Navbar);
+const  App = (props) => {
 
 //   const [loggedIn, setLoggedIn] = React.useState(false);
   
@@ -33,23 +41,26 @@ const  App = () => {
 //     setLoggedIn(true);
 
 // };
-  
+
     return (
-      
+     
           <Router>
-        <Navbar />
+          <NavBarWithContext />
           
         
           <Switch>
-              <UserContext.Provider value="hello context">
-                <Route exact path="/" render={() => <ShopList />}/>
-                <Route path="/login" render={() => <Login />} />
-                <Route path="/register" render={() => <Register />} />
-                <Route exact  path="/items/:id" render={ () => <Items /> } />
-                <Route path="/add-shop-list" render={() => <AddShopList/> } />
-              </UserContext.Provider>
+                  <Route exact path="/" render={() => <Welcome />} />
+                  <PrivateRoute path="/shoplists" component={ShopListWithContext}/>
+                  <PrivateRoute path="/items/:id" component={ItemsWithContext} />
+                  <PrivateRoute path="/add-shop-list" component={AddShopListWithContext} />
+                  <PrivateRoute path="/settings" component={SettingsWithContext} />
+                  <Route path="/login" component={LoginWithContext} />
+                  <Route path="/register" component={RegisterWithContext} />
+                  
+                  <Route component={NotFound} />
+               
               
-              <Route component={NotFound} />
+             
           </Switch>
         </Router>
       

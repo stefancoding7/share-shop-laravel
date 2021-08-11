@@ -8,6 +8,7 @@ require('./bootstrap');
 require('../css/app.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from './Context';
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -20,9 +21,9 @@ import App from './components/App'
 
 if (document.getElementById('app')) {
     ReactDOM.render(
-        <React.StrictMode>
+        <Provider>
           <App />
-        </React.StrictMode>,
+        </Provider>,
         document.getElementById('app')
       );
 }

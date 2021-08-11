@@ -7,7 +7,7 @@ import { GiFoldedPaper, GiSettingsKnobs } from 'react-icons/gi';
 
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
     // const [user, setUser] = useState([]);
 
     // const logout = () => {
@@ -47,12 +47,12 @@ const Navbar = () => {
     //    }
 
 
-
+    
     return(
         <>
         <nav className="navbar navbar-light">
             <div className="container-fluid">
-            <NavLink className="navbar-brand" to="/">
+            <NavLink className="navbar-brand" to={props.context.loggedIn ? '/shoplists' : '/'}>
             <span className="nav-icon">
                 
                 <h3 className=""><span className="s-letter">S</span>hare<span className="s-letter">S</span>hop</h3> 
@@ -61,9 +61,12 @@ const Navbar = () => {
                
             
             </NavLink>
-            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+
+            {props.context.loggedIn ?
+             <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
                 <TiThMenuOutline />
-            </button>
+            </button> : ''}        
+            
             </div>
         </nav>
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
@@ -74,12 +77,14 @@ const Navbar = () => {
             <div className="offcanvas-body small">
                 <div className="d-flex justify-content-around" >
                     
-                        <NavLink to="/">
-                            <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close"><p><span>Shop Lists</span></p></button>
+                        <NavLink to="/shoplists">
+                            <button type="button" className="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close">Shop Lists</button>
                         </NavLink>
                        
-                   
-                        <button type="button" class="btn btn-secondary btn-lg">Settings</button>
+                        <NavLink to="/settings">
+                            <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="offcanvas" aria-label="Close">Settings</button>
+                        </NavLink>
+                        
                     
                 
                 

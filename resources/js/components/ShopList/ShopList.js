@@ -5,15 +5,19 @@ import { GrClose } from "react-icons/gr";
 import { NavLink } from 'react-router-dom';
 import apiClient from '../Auth/apiClient/apiClient';
 import  config from '../../config/config';
-import { UserContext } from '../../UserContext';
+
+import {userContext} from '../../Context';
+
 
 
 class ShopList extends Component {
 
-    static contextType = UserContext
+   
 
     state = {
-        shopList: []
+        shopList: [],
+        user: this.props.context.authenticatedUser
+       
     }
 
     
@@ -44,11 +48,11 @@ class ShopList extends Component {
          .then(data => {
              
              this.setState({ 
-                shopList: data.data,
+                shopList: data.data.data,
                  
              })  
- 
-             console.log(data.data);
+            // console.log(this.context.user);
+            
                  
          }) 
          .catch(function (error) {
@@ -56,18 +60,17 @@ class ShopList extends Component {
              console.log(error);
            })
            
-           const { UserContext }  = this.context;
-        console.log(UserContext);
-           
+          // console.log(this.props.context.authenticatedUser);
        }
 
        
 
     render(){
-        const { shopList } = this.state;
+        const { shopList, user } = this.state;
+        const { context } = this.props;
         
-        console.log(`shopList: ${shopList}`);
-
+       
+       console.log(context.loggedIn);
 
         const mapedLists = shopList.map((list, index) => (
             <>

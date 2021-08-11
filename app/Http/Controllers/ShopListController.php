@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\ShopList;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ShopListController extends Controller
@@ -14,9 +15,12 @@ class ShopListController extends Controller
      */
     public function index()
     {
-        $shopList = ShopList::all();
+        $user = auth()->user();
+        $shopList = $user->shopLists;
         if($shopList) {
-            return $shopList;
+            return response()->json([
+                'data' => $shopList
+            ]);
         } 
        
     }
@@ -28,10 +32,14 @@ class ShopListController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
+
+        $user_id = auth()->user()->id;
         $shopList = new ShopList();
         $shopList->shopListName = $request->shopListName;
         $shopList->slug = $request->slug;
+        $shopList->user_id = $user_id;
         $shopList->save();
         $shop_list_id = $shopList->id;
 
@@ -43,6 +51,7 @@ class ShopListController extends Controller
                 $item = new Item();
                 $item->tags = $tag;
                 $item->shop_list_id = $shop_list_id;
+                $item->user_id = $user_id;
                 $item->save();
                 
                 

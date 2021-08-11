@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ShopList;
 use App\Models\Item;
+use App\Models\User;
 use App\Http\Resources\Items as ItemsResource;
 use App\Http\Resources\ItemsCollection;
+use Throwable;
 
 class ItemController extends Controller
 {
@@ -47,13 +49,64 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $shopList = ShopList::find($id);
-        
-        $items = $shopList->items;
-        $items = $items;
-        $data = $items;
 
-        return response()->json($data);
+        $user = auth()->user();
+        $error = array();
+        if($user){
+            try{
+                    $shopList = ShopList::find($id);
+                    $userAllShopList = $shopList->items;
+                    $userAllShopList = $userAllShopList->where('user_id', $user->id);
+                    $items = $userAllShopList;
+                   
+                    $data = $items;
+                    return response()->json($data);
+                    // $shopList = ShopList::find($id);
+                    // $items = $shopList->items;
+                    // $items = $items->where('user_id', '=', $user->id);
+                    // $count = $items->count();
+                    // if($count >= 1) {
+                    //     $data = $items;
+                    //     return response()->json($data);
+                    // } else {
+                    //     array_push($error, "Items not found");
+                    //     return response()->json([
+                    //             'error' => $error
+                    //         ]);
+                    // }
+                    
+               
+               
+        
+           
+            } catch(Throwable $e) {
+                array_push($error, "Items not found");
+                return response()->json([
+                            
+                                'error' => $error
+                            ]); 
+            }
+            // $shopList = ShopList::find($id);
+            
+            // if($shopList) {
+
+            //     $items = $shopList->items->where('user_id', $user->id);
+            //     if($items) {
+            //         $data = $items;
+            //         return response()->json($data);
+            //     } else {
+            //        return response()->json([
+            //             'error' => ['Item not found']
+            //         ]); 
+            //     }
+               
+        
+            // } else {
+            //     return response()->json([
+            //         'error' => ['Item not found']
+            //     ]);
+            // }
+        }
     }
 
     /**
@@ -87,5 +140,30 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         return $item->delete();
+    }
+
+    public function addItems(Request $request, $id)
+    {
+        $user_id = auth()->user()->id;
+        $tags = $request->tags;
+        $shop_list_id =  $id;
+       
+
+        if(is_array($tags)){
+            foreach($tags as $tag){
+                $item = new Item();
+                $item->tags = $tag;
+                $item->shop_list_id = $shop_list_id;
+                $item->user_id = $user_id;
+                $item->save();
+                
+                
+            }
+        } else {
+            return response()->json([
+                'tags' => $tags,
+                'message' =>'Is not array'
+            ]);
+        }
     }
 }

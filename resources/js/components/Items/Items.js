@@ -16,21 +16,30 @@ class CardList extends Component {
     
        state = {
            
-            items: []
+            items: [],
+            error: [],
+            id: this.props.match.params.id
         }
     
     async componentDidMount() {
-    let id = this.props.match.params.id;
+    
    
-       await axios.get(`${config.apiBaseUrl}items/${id}`) 
+       await axios.get(`${config.apiBaseUrl}items/${this.state.id}`) 
         .then(data => {
+             console.log(data.data);
+            if(data.data.error){
+                this.setState({
+                    error: data.data.error
+                })
+            } else {
+                this.setState({ 
+                    items: data.data,
+                    
+                })  
+    
+               
+            }
             
-            this.setState({ 
-                items: data.data,
-                
-            })  
-
-            console.log(`items: ${data}`);
                 
         }) 
         .catch(function (error) {
@@ -62,7 +71,7 @@ class CardList extends Component {
     complete(id, index){
         axios.put(`${config.apiBaseUrl}itemcomplete/${id}`) 
         .then(response => {
-        //   //window.location = '/';
+        //window.location = '/';
           let array = [...this.state.items]; 
           if (index !== -1) {
               let spliced = [];
@@ -86,9 +95,9 @@ class CardList extends Component {
         console.log('clicked');
     }
     render() {
-       const { items } = this.state;
-      console.log(`items: ${items}`)
-      console.log(this.state.id);
+       const { items, error, id } = this.state;
+     
+     
 
         const mapedItems = items.map((item, index) => (
             <>
@@ -108,9 +117,19 @@ class CardList extends Component {
             </>
         ))
 
+        const errors = error.map((error, index) => (
+            <>
+            <div key={index} class="alert alert-danger" role="alert">
+                {error}
+            </div>
+            </>
+        ))
+
         return(
             <>
-             <div className="container mt-2">
+            {error.length >= 1 ? <>{errors}</> : 
+            
+            <div className="container mt-2">
                 <div className="card shadow-lg" >
                         <div className="card-header">
                             <div className="row">
@@ -128,9 +147,11 @@ class CardList extends Component {
                             
                         </ul>
                     </div>
-                    <AddItems />
+                    <AddItems items={this.state.items} id={id}/>
 
              </div>
+            }
+             
                 
                 
             </>

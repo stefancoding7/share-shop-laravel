@@ -22,4 +22,9 @@ class Item extends Model
     {
         return $this->belongsTo(ShopList::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
