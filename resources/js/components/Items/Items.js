@@ -98,6 +98,7 @@ class CardList extends Component {
        const { items, error, id } = this.state;
      
      
+       
 
         const mapedItems = items.map((item, index) => (
             <>
@@ -147,6 +148,7 @@ class CardList extends Component {
                             
                         </ul>
                     </div>
+                    
                     <AddItems items={this.state.items} id={id}/>
 
              </div>

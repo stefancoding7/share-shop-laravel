@@ -32,6 +32,7 @@ const ItemsWithContext = withContext(Items);
 const RegisterWithContext = withContext(Register);
 const SettingsWithContext = withContext(Settings);
 const NavBarWithContext = withContext(Navbar);
+const WelcomeWithContext = withContext(Welcome);
 const  App = (props) => {
 
 //   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -49,7 +50,7 @@ const  App = (props) => {
           
         
           <Switch>
-                  <Route exact path="/" render={() => <Welcome />} />
+                  <Route exact path="/" component={WelcomeWithContext} />
                   <PrivateRoute path="/shoplists" component={ShopListWithContext}/>
                   <PrivateRoute path="/items/:id" component={ItemsWithContext} />
                   <PrivateRoute path="/add-shop-list" component={AddShopListWithContext} />

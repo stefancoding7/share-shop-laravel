@@ -1,5 +1,5 @@
 import { Component, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import ReactTextTransition, { presets } from "react-text-transition";
 import config from '../../config/config';
 require ('./welcome.scss');
@@ -32,10 +32,13 @@ class Welcome extends Component{
       
          
    render(){
+     const { loggedIn } = this.props.context;
+     
     return(
         <>
-            
-            <div className="welcome-container">
+            { !loggedIn ?
+            <>
+              <div className="welcome-container">
             <img className="background" src={`${config.imagesUrl}storage/site-images/welcome-image-2.jpg`} alt="..." />
 
             <div class="glass-container"><section className="inline">
@@ -63,17 +66,24 @@ class Welcome extends Component{
             <div className="d-flex justify-content-around mt-3">
                 <div className="">
                     <NavLink to="/login">
-                        <button className="btn btn-secondary">LogIn</button>
+                        <button className="shadow btn btn-outline-secondary btn-lg rounded-pill">LogIn</button>
                     </NavLink>
                 </div>
                 <div className="">
                     <NavLink to="/register">
-                        <button className="btn btn-secondary">Register</button>
+                        <button className="shadow btn btn-outline-secondary btn-lg rounded-pill">Register</button>
                     </NavLink>
                 </div>
                     
                 </div>
+              </>
+            :
+
+            <Redirect to="/shoplists" />
+
             
+            }
+           
             
         </>
     )    
