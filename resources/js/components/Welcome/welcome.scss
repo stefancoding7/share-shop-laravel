@@ -1,19 +1,23 @@
 $url: 'http://127.0.0.1:8000/storage/site-images/welcome-image-2.jpg';
 
 .background{
-    height: 80vh;
-    width: 
-    background: no-repeat center center fixed;
+    height: 70vh;
+    width: 100vh;
+    background-position: center center;
 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-attachment: fixed;
+
+    background-size: contain;
+
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    
     animation: fadeIn 5s;
-  -webkit-animation: fadeIn 5s;
-  -moz-animation: fadeIn 5s;
-  -o-animation: fadeIn 5s;
-  -ms-animation: fadeIn 5s;
+    -webkit-animation: fadeIn 5s;
+    -moz-animation: fadeIn 5s;
+    -o-animation: fadeIn 5s;
+    -ms-animation: fadeIn 5s;
+    
 }
 
 @keyframes fadeIn {
@@ -64,7 +68,17 @@ $url: 'http://127.0.0.1:8000/storage/site-images/welcome-image-2.jpg';
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 100%;
-    
+    background-color: white;
+  }
+
+  .create-button {
+    padding: 3px;
+    border-left: solid 1px red;
+    border-right: solid 1px red;
+  }
+
+  .text-box{
+    background-color: white;
   }
 
   
